@@ -6,7 +6,7 @@
 #    By: learodri <learodri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 20:55:22 by learodri          #+#    #+#              #
-#    Updated: 2022/09/29 21:00:13 by learodri         ###   ########.fr        #
+#    Updated: 2022/10/05 20:31:29 by learodri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,4 +25,4 @@ OBJ_PATH	= obj
 ### SOURCE FILES ###
 SOURCES = program.c \
 		errors.c \
-		parsing.c
+		searchcmd.c
