@@ -6,7 +6,7 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 20:39:53 by learodri          #+#    #+#             */
-/*   Updated: 2022/09/29 20:43:59 by learodri         ###   ########.fr       */
+/*   Updated: 2022/10/06 21:52:47 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,10 @@
 # include <errno.h>
 # include "libft.h"
 
-#endif
+char	*find_path(char *cmd, char **envp);
+void	boom(char	*str);
+void	not_found(char	*str, char **cmd);
+void	file_not_found(char	*str);
+void	free_split(char **args);
+
+#endif		

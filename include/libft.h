@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/29 20:39:53 by learodri          #+#    #+#             */
-/*   Updated: 2022/09/29 21:08:59 by learodri         ###   ########.fr       */
+/*   Created: 2022/09/29 20:43:27 by learodri          #+#    #+#             */
+/*   Updated: 2022/09/29 20:43:56 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef LIBFT_H
+# define LIBFT_H
 
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <sys/wait.h>
-# include <fcntl.h>
-# include <errno.h>
-//# include "libft.h"
+# include <stdio.h>
+
+char		**ft_split(const char *s, char c);
+char		*ft_strjoin(char *s1, char *s2);
+size_t		ft_strlen(const char *s);
+char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 
 #endif

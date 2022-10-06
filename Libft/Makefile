@@ -16,7 +16,7 @@ OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
 # Flags
-CC = gcc $(CFLAGS)
+CC = clang
 CFLAGS = -Wall -Wextra -Werror
 
 # Rules

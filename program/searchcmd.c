@@ -6,13 +6,13 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:16:45 by learodri          #+#    #+#             */
-/*   Updated: 2022/10/05 22:22:54 by learodri         ###   ########.fr       */
+/*   Updated: 2022/10/06 18:48:28 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	**get_paths(char **envp)
+char	**grab_paths(char **envp)
 {
 	char	**paths;
 	int		i;
@@ -24,29 +24,29 @@ char	**get_paths(char **envp)
 	return (paths);
 }
 
-char	*path(char *cmd, char **envp)
+char	*find_path(char *cmd, char **envp)
 {
 	char	**paths;
-	char	*path;
-	char	*slash;
+	char	*final_path;
+	char	*add_bar;
 	int		i;
 
 	i = 0;
 	if (ft_strnstr(cmd, "/", ft_strlen(cmd)))
 		return (cmd);
-	paths = get_paths(envp);
+	paths = grab_paths(envp);
 	i = -1;
 	while (paths[++i])
 	{
-		slash = ft_strjoin(paths[i], "/");
-		path = ft_strjoin(slash, cmd);
-		free(slash);
-		if (!access(path, F_OK))
+		add_bar = ft_strjoin(paths[i], "/");
+		final_path = ft_strjoin(add_bar, cmd);
+		free(add_bar);
+		if (!access(final_path, F_OK))
 		{
 			free_split(paths);
-			return (path);
+			return (final_path);
 		}
-		free(path);
+		free(final_path);
 	}
 	free_split(paths);
 	return (0);
