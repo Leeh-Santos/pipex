@@ -6,7 +6,7 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:29:15 by learodri          #+#    #+#             */
-/*   Updated: 2022/10/10 19:15:21 by learodri         ###   ########.fr       */
+/*   Updated: 2022/10/10 22:32:00 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	kid1(int *pipefd, int *filefd, char **av, char **envp)
 		filefd[0] = open(av[1], O_RDONLY);
 		if (filefd[0] < 0)
 			file_not_found("file1 error");
-		cmd1 = ft_split(av[2], ' ');
+		cmd1 = ft_split(av[2], ' '); // "ls -la"
 		close(pipefd[0]);
-		if (dup2(filefd[0], STDIN_FILENO) < 0
-			|| dup2(pipefd[1], STDOUT_FILENO) < 0)
+		if (dup2(filefd[0], STDIN_FILENO) < 0 // file1 to be stdin 
+			|| dup2(pipefd[1], STDOUT_FILENO) < 0) // end[1] to be stdout 
 			boom("dup2 problem dude, Im sorry");
 		if (cmd1[0] && find_path(cmd1[0], envp))
 		{
@@ -79,7 +79,7 @@ int	main(int ac, char **av, char **envp)
 		write(2, "goes like this: ./pipex file1 cmd1 cmd2 file2", 46);
 		exit(EXIT_FAILURE);
 	}
-	if (pipe(pipefd) < 0)
+	if (pipe(pipefd) < 0) // end[1] <--------------------------> end[0]
 		boom("pipe failed bro, try again");
 	kid1(pipefd, filefd, av, envp);
 	kid2(pipefd, filefd, av, envp);

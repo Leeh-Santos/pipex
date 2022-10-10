@@ -6,7 +6,7 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:16:45 by learodri          #+#    #+#             */
-/*   Updated: 2022/10/06 18:48:28 by learodri         ###   ########.fr       */
+/*   Updated: 2022/10/10 22:35:01 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ char	**grab_paths(char **envp)
 	int		i;
 
 	i = 0;
-	while (!ft_strnstr(envp[i], "PATH", 4))
+	while (!ft_strnstr(envp[i], "PATH", 4)) // runs env till find PATH
 		i++;
-	paths = ft_split(envp[i] + 5, ':');
+	paths = ft_split(envp[i] + 5, ':'); // arrays of strings starts after "PATH="
 	return (paths);
 }
 
@@ -34,12 +34,12 @@ char	*find_path(char *cmd, char **envp)
 	i = 0;
 	if (ft_strnstr(cmd, "/", ft_strlen(cmd)))
 		return (cmd);
-	paths = grab_paths(envp);
+	paths = grab_paths(envp); //arrays of strings from env
 	i = -1;
 	while (paths[++i])
 	{
-		add_bar = ft_strjoin(paths[i], "/");
-		final_path = ft_strjoin(add_bar, cmd);
+		add_bar = ft_strjoin(paths[i], "/"); // add bar at the end of each possible path
+		final_path = ft_strjoin(add_bar, cmd); // add (ex. "ls") after the end of each path
 		free(add_bar);
 		if (!access(final_path, F_OK))
 		{
