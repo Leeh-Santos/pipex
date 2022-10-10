@@ -6,7 +6,7 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:29:15 by learodri          #+#    #+#             */
-/*   Updated: 2022/10/06 20:47:44 by learodri         ###   ########.fr       */
+/*   Updated: 2022/10/10 19:15:21 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void	kid1(int *pipefd, int *filefd, char **av, char **envp)
 		if (dup2(filefd[0], STDIN_FILENO) < 0
 			|| dup2(pipefd[1], STDOUT_FILENO) < 0)
 			boom("dup2 problem dude, Im sorry");
-		if (cmd1[0] && find_path(cmd1[0], envp)) 
+		if (cmd1[0] && find_path(cmd1[0], envp))
 		{
 			execve(find_path(cmd1[0], envp), cmd1, envp);
 			free_split(cmd1);
-		}   
+		}
 		else
-			not_found("cmd1 error ", cmd1); 
+			not_found("cmd1 error ", cmd1);
 	}
 }
 
@@ -56,7 +56,7 @@ void	kid2(int *pipefd, int *filefd, char **av, char **envp)
 		cmd2 = ft_split(av[3], ' ');
 		close(pipefd[1]);
 		if (dup2(filefd[1], STDOUT_FILENO) < 0
-		|| dup2(pipefd[0], STDIN_FILENO) < 0)
+			|| dup2(pipefd[0], STDIN_FILENO) < 0)
 			boom("dup2 problem, try again");
 		if (cmd2[0] && find_path(cmd2[0], envp))
 		{
@@ -67,11 +67,12 @@ void	kid2(int *pipefd, int *filefd, char **av, char **envp)
 			not_found("cmd2 error ", cmd2);
 	}
 }
+
 int	main(int ac, char **av, char **envp)
 {
 	int	filefd[2];
 	int	pipefd[2];
-	int kid_status;
+	int	kid_status;
 
 	if (ac != 5)
 	{

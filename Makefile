@@ -6,7 +6,7 @@
 #    By: learodri <learodri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 20:55:22 by learodri          #+#    #+#              #
-#    Updated: 2022/10/06 21:46:02 by learodri         ###   ########.fr        #
+#    Updated: 2022/10/10 19:10:08 by learodri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ FLAGS	= -Wall -Wextra -Werror
 NAME	= pipex
 ### INCLUDES ###
 INCLUDE	= include
-LIBFT_PATH	= Libft
+LIBFT_PATH	= libft
 SRC_PATH	= program
 OBJ_PATH	= obj
 
@@ -28,43 +28,37 @@ SOURCES = pipex.c \
 		searchcmd.c
 
 ### OBJECTS ###
-SRC     = $(addprefix $(SRC_PATH)/,$(SOURCES))
-OBJ     = $(addprefix $(OBJ_PATH)/,$(SOURCES:.c=.o))
+SRC	= $(addprefix $(SRC_PATH)/,$(SOURCES))
+OBJ	= $(addprefix $(OBJ_PATH)/,$(SOURCES:.c=.o))
 
 ### COLORS ###
-NOC             = \033[0m
-RED             = \033[1;31m
-GREEN   = \033[1;32m
-YELLOW  = \033[1;33m
-BLUE    = \033[1;34m
-WHITE   = \033[1;37m
+NOC		= \033[0m
+RED		= \033[1;31m
+GREEN	= \033[1;32m
 
 ### RULES ###
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		@echo "$(YELLOW)libft..$(NOC)"
-		@make -sC $(LIBFT_PATH)
-		@$(CC) $(FLAGS) -L $(LIBFT_PATH) -o $@ $^ -lft
-		@echo "$(GREEN)$@$(NOC)"
+	@make -sC $(LIBFT_PATH)
+	@$(CC) $(FLAGS) -L $(LIBFT_PATH) -o $@ $^ -lft
+	@echo "$(GREEN) ***someone calls Mario cuz PIPEX is ready baby!!!!***$(NOC)"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(INCLUDE)/$(NAME).h
-		@mkdir -p obj
-		@$(CC) $(FLAGS) -I$(INCLUDE) -c -o $@ $<
-		@echo "$(BLUE)clang $(WHITE)$(notdir $@)$(NOC)"
+	@mkdir -p obj
+	@$(CC) $(FLAGS) -I$(INCLUDE) -c -o $@ $<
 
 clean:
-		@echo "$(RED)clean$(NOC)"
-		@make clean -sC $(LIBFT_PATH)
-		@rm -rf $(OBJ_PATH)
+	@echo "$(RED)clean$(NOC)"
+	@make clean -sC $(LIBFT_PATH)
+	@rm -rf $(OBJ_PATH)
 
 fclean: clean
-		@echo "$(RED)fclean$(NOC)"
-		@make fclean -sC $(LIBFT_PATH)
-		@rm -f $(NAME)
+	@echo "$(RED)fclean$(NOC)"
+	@make fclean -sC $(LIBFT_PATH)
+	@rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re norm push
-
+.PHONY:	all clean fclean re norm push
