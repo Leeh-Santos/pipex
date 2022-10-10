@@ -6,7 +6,7 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:29:15 by learodri          #+#    #+#             */
-/*   Updated: 2022/10/10 22:32:00 by learodri         ###   ########.fr       */
+/*   Updated: 2022/10/10 22:39:42 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	kid1(int *pipefd, int *filefd, char **av, char **envp)
 		filefd[0] = open(av[1], O_RDONLY);
 		if (filefd[0] < 0)
 			file_not_found("file1 error");
-		cmd1 = ft_split(av[2], ' '); // "ls -la"
+		cmd1 = ft_split(av[2], ' '); // "ls -la" to be used at execve after
 		close(pipefd[0]);
 		if (dup2(filefd[0], STDIN_FILENO) < 0 // file1 to be stdin 
 			|| dup2(pipefd[1], STDOUT_FILENO) < 0) // end[1] to be stdout 
 			boom("dup2 problem dude, Im sorry");
-		if (cmd1[0] && find_path(cmd1[0], envp))
+		if (cmd1[0] && find_path(cmd1[0], envp)) // only send cmd[0] to add at the end of paths
 		{
-			execve(find_path(cmd1[0], envp), cmd1, envp);
+			execve(find_path(cmd1[0], envp), cmd1, envp); // 
 			free_split(cmd1);
 		}
 		else
